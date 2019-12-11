@@ -1,74 +1,75 @@
 /*
- * ANALISADOR L…XICO
+ * ANALISADOR L√âXICO
  
  * DATA: 10/12/2019
  * AUTOR: Nathan James Arrais Vasconcelos
- * DISCIPLINA: Teoria da computaÁ„o e compiladores
- * DESCRI«√O: Criar um programa em ìCî ou em ìC++î, que ser· um analisador lÈxico, para a linguagem chamada 
- * ìMinha Linguagem Normalî, este analisador deve ser construÌdo com algumas das tÈcnicas vistas em laboratÛrio, isso 
- * inclui usar AFD, M·quina de Turing, AFD de Pilha com M·quina de Turing.
- * TÈcnica utilizada:  AFD (AutÙmato Finito DeterminÌstico), para entrada de palavras. Para verificaÁ„o lÈxica utilizei 
- * um sistema simples com laÁos de repetiÁ„o, estruturas condicionais e algumas manipulaÁıes com vetores de strings. Sendo 
- * esperado na saÌda, a exibiÁ„o das palavras que possuem o alfabeto v·lido, geraÁ„o do arquivo "resultado.txt" e a tabela 
- * de palavras v·lidas e seu tipo, por exemplo: NumÈrico, operador aritmÈtico, operador de fechamento e operador relacionais. O arquivo resultado contÈm a descriÁ„o dos erros, as palavras inv·lidas e os caracteres que n„o fazem parte do alfabeto.
- * IMPORTANTE: O AFD foi criado para verificar PALAVRAS e n„o CARACTERES, para que o programa desempenhe bem a sua funÁ„o 
- * se faz necess·rio a inclus„o de espaÁos em branco, ou separadores, entre as palavras e caracteres especiais.
- * Funcionamento: Inicialmente foi criada uma matriz com as palavras v·lidas, um vetor com o alfabeto da linguagem e algumas
- * vari·veis globais, necess·rias para a funÁ„o chave e a main.
- * Dentro da funÁ„o main est„o declarados mais quatros vetores de strings, o str, o fname, os separadores e os operadores, 
- * necess·rios para a manipulaÁ„o das palavras. AlÈm deles se encontram declaradas as vari·veis contadoras, necess·rias para a detecÁ„o de erros, e as vari·veis auxiliares j e m, utilizadas como "Ìndice".
- * Posteriormente utilizei a funÁ„o setlocale da biblioteca locale.h, visando fugir dos incÙmodos erros na visualizaÁ„o do 
- * programa. Feito isso realizei a leitura de um arquivo e logo em seguida comecei a gravaÁ„o de outro, sendo este ˙ltimo 
+ * GITHUB: https://github.com/NathanJAVasconcelos/Analisador-l-xico/blob/master/README.md
+ * DISCIPLINA: Teoria da computa√ß√£o e compiladores
+ * DESCRI√á√ÉO: Criar um programa em ‚ÄúC‚Äù ou em ‚ÄúC++‚Äù, que ser√° um analisador l√©xico, para a linguagem chamada 
+ * ‚ÄúMinha Linguagem Normal‚Äù, este analisador deve ser constru√≠do com algumas das t√©cnicas vistas em laborat√≥rio, isso 
+ * inclui usar AFD, M√°quina de Turing, AFD de Pilha com M√°quina de Turing.
+ * T√©cnica utilizada:  AFD (Aut√¥mato Finito Determin√≠stico), para entrada de palavras. Para verifica√ß√£o l√©xica utilizei 
+ * um sistema simples com la√ßos de repeti√ß√£o, estruturas condicionais e algumas manipula√ß√µes com vetores de strings. Sendo 
+ * esperado na sa√≠da, a exibi√ß√£o das palavras que possuem o alfabeto v√°lido, gera√ß√£o do arquivo "resultado.txt" e a tabela 
+ * de palavras v√°lidas e seu tipo, por exemplo: Num√©rico, operador aritm√©tico, operador de fechamento e operador relacionais. O arquivo resultado cont√©m a descri√ß√£o dos erros, as palavras inv√°lidas e os caracteres que n√£o fazem parte do alfabeto.
+ * IMPORTANTE: O AFD foi criado para verificar PALAVRAS e n√£o CARACTERES, para que o programa desempenhe bem a sua fun√ß√£o 
+ * se faz necess√°rio a inclus√£o de espa√ßos em branco, ou separadores, entre as palavras e caracteres especiais.
+ * Funcionamento: Inicialmente foi criada uma matriz com as palavras v√°lidas, um vetor com o alfabeto da linguagem e algumas
+ * vari√°veis globais, necess√°rias para a fun√ß√£o chave e a main.
+ * Dentro da fun√ß√£o main est√£o declarados mais quatros vetores de strings, o str, o fname, os separadores e os operadores, 
+ * necess√°rios para a manipula√ß√£o das palavras. Al√©m deles se encontram declaradas as vari√°veis contadoras, necess√°rias para a detec√ß√£o de erros, e as vari√°veis auxiliares j e m, utilizadas como "√≠ndice".
+ * Posteriormente utilizei a fun√ß√£o setlocale da biblioteca locale.h, visando fugir dos inc√¥modos erros na visualiza√ß√£o do 
+ * programa. Feito isso realizei a leitura de um arquivo e logo em seguida comecei a grava√ß√£o de outro, sendo este √∫ltimo 
  * com o resultado do programa.
- * O cÛdigo realmente comeÁa na estrutura de repetiÁ„o while, essa apenas desempenha sua funÁ„o enquanto ch=fgetc(f1) for 
- * diferente do fim de arquivo, isto sÛ È possÌvel devido a funÁ„o fgetc, que È respons·vel pela leitura do caracter presente
- * na posiÁ„o atual do fluxo interno e assim que o faz, a posiÁ„o atual È avanÁada para o prÛximo caractere. Isto acontece 
- * repetidas vezes, atÈ que ocorra um erro ou chegue no fim do arquivo, retornando EOF e consequentemente interrompendo o 
+ * O c√≥digo realmente come√ßa na estrutura de repeti√ß√£o while, essa apenas desempenha sua fun√ß√£o enquanto ch=fgetc(f1) for 
+ * diferente do fim de arquivo, isto s√≥ √© poss√≠vel devido a fun√ß√£o fgetc, que √© respons√°vel pela leitura do caracter presente
+ * na posi√ß√£o atual do fluxo interno e assim que o faz, a posi√ß√£o atual √© avan√ßada para o pr√≥ximo caractere. Isto acontece 
+ * repetidas vezes, at√© que ocorra um erro ou chegue no fim do arquivo, retornando EOF e consequentemente interrompendo o 
  * while.
- * Dentro do nosso while temos outras trÍs estruturas de repetiÁ„o for, vamos falar da primeira delas. O primeiro for È inicializado
- * com 0 e seguir·  "ativo" enquanto a vari·vel de autoincremento m for menor do que 42, mas porque 42? A resposta È simples,
- * nosso alfabeto comporta 43 caracteres e o for È inicializado com 0, logo a quantidade de vezes que precisamos percorrÍ-lo È igual a 43-1.
- * Dentro desta estrutura de repetiÁ„o temos apenas um if, o mesmo È respons·vel por comparar ch com o nosso vetor alfabeto 
- * na posiÁ„o m, caso sejam diferentes a vari·vel aux ser· incrementada, mas no que isso nos ajuda?  F·cil, com o tÈrmino 
- * destas repetiÁıes compararemos o aux com a quantidade de caracteres comportados pelo alfabeto, caso sejam iguais um 
- * print informando o erro ser· emitido no txt e logo em seguida a nossa vari·vel aux È zerada, pronta para ser utilizada 
+ * Dentro do nosso while temos outras tr√™s estruturas de repeti√ß√£o for, vamos falar da primeira delas. O primeiro for √© inicializado
+ * com 0 e seguir√°  "ativo" enquanto a vari√°vel de autoincremento m for menor do que 52, mas porque 52? A resposta √© simples,
+ * nosso alfabeto comporta 43 caracteres e o for √© inicializado com 0, logo a quantidade de vezes que precisamos percorr√™-lo √© igual a 53-1.
+ * Dentro desta estrutura de repeti√ß√£o temos apenas um if, o mesmo √© respons√°vel por comparar ch com o nosso vetor alfabeto 
+ * na posi√ß√£o m, caso sejam diferentes a vari√°vel aux ser√° incrementada, mas no que isso nos ajuda?  F√°cil, com o t√©rmino 
+ * destas repeti√ß√µes compararemos o aux com a quantidade de caracteres comportados pelo alfabeto, caso sejam iguais um 
+ * print informando o erro ser√° emitido no txt e logo em seguida a nossa vari√°vel aux √© zerada, pronta para ser utilizada 
  * quando formos testar outro caracter.
-* O segundo for conta com a vari·vel j inicializada em 0 e atuar· enquanto a mesma for menor do que 13, quer saber o motivo 
-* desse n˙mero? Tranquilo, È a nossa quantidade de operadores-1! Declarados no inÌcio da funÁ„o main. Dentro do for temos 
-* uma estrutura condicional que compara se o que est· atribuÌdo a ch È igual a algum de nossos operadores previamente declarados
-* na funÁ„o main, se a afirmativa for verdadeira realizaremos outro teste condicional, o oposto resulta no incremento do j e
+* O segundo for conta com a vari√°vel j inicializada em 0 e atuar√° enquanto a mesma for menor do que 13, quer saber o motivo 
+* desse n√∫mero? Tranquilo, √© a nossa quantidade de operadores-1! Declarados no in√≠cio da fun√ß√£o main. Dentro do for temos 
+* uma estrutura condicional que compara se o que est√° atribu√≠do a ch √© igual a algum de nossos operadores previamente declarados
+* na fun√ß√£o main, se a afirmativa for verdadeira realizaremos outro teste condicional, o oposto resulta no incremento do j e
 * consequentemente num novo teste condicional.
-Sendo a afirmativa verdadeira, testamos se o ch È igual a algum operador relacional (=,> e <), caso seja, uma mensagem ser· 
-* printada tela, logo em seguida nosso contador de operadores ser· incrementado (op++) e atribuÌmos ao nosso vetor str na 
-* posiÁ„o i (str[i]) o valor de nulo (ë\0í),  utilizando-o como par‚metro para a chamada da funÁ„o chave.
-* Na funÁ„o chave realizamos a abertura do arquivo de gravaÁ„o e logo em seguida declaramos duas vari·veis Ìndices e uma 
-* especial, seu nome È flag e ter· como valores 0 e 1, utilizada nas estruturas condicionais posteriormente citadas.  
-* A funÁ„o chave tem em seu interior uma estrutura de repetiÁ„o for que È inicializada com k=0 e sÛ ser· fechada quando k 
-* for menor do que 10, afinal temos 11 palavras v·lidas e esse valor -1 È igual a 10. Dentro desta estrutura contamos com o 
-* if, este utiliza o strcmp para comparar o vetor palavras na posiÁ„o K com o ponteiro p. Caso a afirmativa seja verdadeira 
-* uma mensagem ser· printada na tela, informando a palavra v·lida, logo em seguida o contador pc ser· incrementado 
-* (utilizado para informar a quantidade de palavras v·lidas), o valor de 1 ser· atribuÌdo a flag e tanto a estrutura de 
-* repetiÁ„o quanto a condicional ser„o interrompidas.
-* Ainda na funÁ„o chave temos um if que utiliza a vari·vel flag como par‚metro, caso a mesma seja 0 seremos encaminhados 
-* para outra estrutura condicional. Se isdigit (funÁ„o da biblioteca ctype.h para verificar se o caracter È um dÌgito 
-* decimal) for verdadeiro, emitiremos um print informando se tratar de um n˙mero e incrementamos o contador. Caso contr·rio,
-* faremos um teste para descobrir se o vetor p È diferente de nulo, sendo verdadeira a afirmativa, imprimimos no arquivo a 
-* palavra n„o reconhecida e incrementamos o contador. No fim da funÁ„o atribuÌmos a vari·vel i o valor de -1, pois a mesma È 
-* utilizada como critÈrio para uma estrutura condicional na funÁ„o main.
-* Voltando para a nossa funÁ„o main, mais especificamente para o else de nosso segundo for. Caso o mesmo seja iniciado, 
-* printaremos na tela o operador aritmÈtico, incrementamos a nossa vari·vel contadora de operadores, atribuÌmos a matriz 
-* str na posiÁ„o i o valor de nulo (ë\0í) e a realizamos a chamada da funÁ„o chave recebendo como par‚metro str (A funÁ„o 
-* chave j· foi explicada).
-* O terceiro for dentro da estrutura while È inicializado com j igual a 0 e tem como critÈrio de parada essa mesma vari·vel 
-* ter valor menos do que 13 (qtd de separadores-1). No seu interior tem uma estrutura condicional que quebra o laÁo caso i 
-* seja igual a -1, essa vari·vel recebe o valor -1 sempre que passa pela funÁ„o chave. Logo em seguida realiza uma nova 
-* comparaÁ„o, caso ch seja igual a eps na posiÁ„o j uma sequÍncia de ifs ser· testada, visando encontrar um operador de 
-* fechamento (){}î em dado momento È atribuÌdo ao vetor str na posiÁ„o i o valor ë\0í e a funÁ„o chave È chamada.
-* Ainda dentro do while, testamos se o i È diferente de -1, caso a afirmativa seja verdadeira È atribuÌdo ao vetor str na 
-* posiÁ„o i o valor ë\0í e a funÁ„o chave È chamada. Caso contr·rio ser· atribuÌdo 0 ao valor de i e o while seguir· enquanto
+Sendo a afirmativa verdadeira, testamos se o ch √© igual a algum operador relacional (=,> e <), caso seja, uma mensagem ser√° 
+* printada tela, logo em seguida nosso contador de operadores ser√° incrementado (op++) e atribu√≠mos ao nosso vetor str na 
+* posi√ß√£o i (str[i]) o valor de nulo (‚Äò\0‚Äô),  utilizando-o como par√¢metro para a chamada da fun√ß√£o chave.
+* Na fun√ß√£o chave realizamos a abertura do arquivo de grava√ß√£o e logo em seguida declaramos duas vari√°veis √≠ndices e uma 
+* especial, seu nome √© flag e ter√° como valores 0 e 1, utilizada nas estruturas condicionais posteriormente citadas.  
+* A fun√ß√£o chave tem em seu interior uma estrutura de repeti√ß√£o for que √© inicializada com k=0 e s√≥ ser√° fechada quando k 
+* for menor do que 10, afinal temos 11 palavras v√°lidas e esse valor -1 √© igual a 10. Dentro desta estrutura contamos com o 
+* if, este utiliza o strcmp para comparar o vetor palavras na posi√ß√£o K com o ponteiro p. Caso a afirmativa seja verdadeira 
+* uma mensagem ser√° printada na tela, informando a palavra v√°lida, logo em seguida o contador pc ser√° incrementado 
+* (utilizado para informar a quantidade de palavras v√°lidas), o valor de 1 ser√° atribu√≠do a flag e tanto a estrutura de 
+* repeti√ß√£o quanto a condicional ser√£o interrompidas.
+* Ainda na fun√ß√£o chave temos um if que utiliza a vari√°vel flag como par√¢metro, caso a mesma seja 0 seremos encaminhados 
+* para outra estrutura condicional. Se isdigit (fun√ß√£o da biblioteca ctype.h para verificar se o caracter √© um d√≠gito 
+* decimal) for verdadeiro, emitiremos um print informando se tratar de um n√∫mero e incrementamos o contador. Caso contr√°rio,
+* faremos um teste para descobrir se o vetor p √© diferente de nulo, sendo verdadeira a afirmativa, imprimimos no arquivo a 
+* palavra n√£o reconhecida e incrementamos o contador. No fim da fun√ß√£o atribu√≠mos a vari√°vel i o valor de -1, pois a mesma √© 
+* utilizada como crit√©rio para uma estrutura condicional na fun√ß√£o main.
+* Voltando para a nossa fun√ß√£o main, mais especificamente para o else de nosso segundo for. Caso o mesmo seja iniciado, 
+* printaremos na tela o operador aritm√©tico, incrementamos a nossa vari√°vel contadora de operadores, atribu√≠mos a matriz 
+* str na posi√ß√£o i o valor de nulo (‚Äò\0‚Äô) e a realizamos a chamada da fun√ß√£o chave recebendo como par√¢metro str (A fun√ß√£o 
+* chave j√° foi explicada).
+* O terceiro for dentro da estrutura while √© inicializado com j igual a 0 e tem como crit√©rio de parada essa mesma vari√°vel 
+* ter valor menos do que 13 (qtd de separadores-1). No seu interior tem uma estrutura condicional que quebra o la√ßo caso i 
+* seja igual a -1, essa vari√°vel recebe o valor -1 sempre que passa pela fun√ß√£o chave. Logo em seguida realiza uma nova 
+* compara√ß√£o, caso ch seja igual a eps na posi√ß√£o j uma sequ√™ncia de ifs ser√° testada, visando encontrar um operador de 
+* fechamento (){}‚Äù em dado momento √© atribu√≠do ao vetor str na posi√ß√£o i o valor ‚Äò\0‚Äô e a fun√ß√£o chave √© chamada.
+* Ainda dentro do while, testamos se o i √© diferente de -1, caso a afirmativa seja verdadeira √© atribu√≠do ao vetor str na 
+* posi√ß√£o i o valor ‚Äò\0‚Äô e a fun√ß√£o chave √© chamada. Caso contr√°rio ser√° atribu√≠do 0 ao valor de i e o while seguir√° enquanto
 * (ch=fgetc(f1))!=EOF.
-* Fora do while temos apenas os comandos que imprimem erros no arquivo (ApÛs realizar um teste com os contadores) e o 
-* fechamento do arquivo de leitura e gravaÁ„o.
+* Fora do while temos apenas os comandos que imprimem erros no arquivo (Ap√≥s realizar um teste com os contadores) e o 
+* fechamento do arquivo de leitura e grava√ß√£o.
 */
 
 #include<stdio.h> //entrada e saida
@@ -81,7 +82,7 @@ int i=0, id=0, pc=0, num=0, op=0;
 char palavras[11][10]={"for","step","sqrt","if","else","return",
 "print","read","to","num","string"};
 char alfabeto[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
-'r', 's', 't', 'u', 'v', 'x', 'y', 'z', '=', '>', '<', '(', ')', '{', '}', '+', '-', '%', ',', ';', '"', '[', ']','/',':'};
+'r', 's', 't', 'u', 'v', 'x', 'y', 'z', '=', '>', '<', '(', ')', '{', '}', '+', '-', '%', ',', ';', '"', '[', ']', '/', ':', '0', '1', '2', '3', '4', '5', '6', '7', '9'};
 main()
 {
 	char ch,str[25],seps[14]=" \t\n,;(){}[]\"<>",oper[]="%*-+=<>/";
@@ -93,7 +94,7 @@ main()
     scanf("%s",fname);
     f1 = fopen(fname,"r");
 	if(f1==NULL){
-	 printf("O arquivo n„o foi encontrado");
+	 printf("O arquivo n√£o foi encontrado");
 	 exit(0);
 	}
 	FILE *f2;
@@ -101,30 +102,30 @@ main()
     fprintf(f2, "\n%s", "Arquivo ");
     fprintf(f2, " %s", fname);
     fprintf(f2, " %s", "analisado.");
-    fprintf(f2, "\n%s", "SaÌda:");
+    fprintf(f2, "\n%s", "Sa√≠da:");
     printf("Palavras e operadores reconhecidos: \n");
 	while((ch=fgetc(f1))!=EOF){
-	  for(m=0;m<42;m++){
+	  for(m=0;m<52;m++){
 	  		 if ((ch!=alfabeto[m]) && (ch!=' ')){
 	  		 	aux++;
 			   }
 	  }
-	  if(aux==42) {
+	  if(aux==52) {
 	  	 fprintf(f2, "\n%s", "O caracter ");
          fprintf(f2, "\t%c\t", ch);
-         fprintf(f2, "\t%s", " n„o faz parte do alfabeto!");
+         fprintf(f2, "\t%s", " n√£o faz parte do alfabeto!");
 	  	 aux=0;
 	  }
       for(j=0;j<=13;j++){
         if(ch==oper[j]){
 	         if(ch=='='||ch=='>'||ch=='<'){ 
-	         printf("%c È um operador relacional\n",ch);
+	         printf("%c √© um operador relacional\n",ch);
              op++;
              str[i]='\0';
              chave(str);
 	         }
 	         else{ 
-	         printf("%c È um operador aritmÈtico\n",ch);
+	         printf("%c √© um operador aritm√©tico\n",ch);
              op++;
              str[i]='\0';
              chave(str);
@@ -135,25 +136,25 @@ main()
         if(i==-1) break;
         if(ch==seps[j]){
         if(ch=='{'){
-        	printf("%c È um operador de fechamento\n",ch);
+        	printf("%c √© um operador de fechamento\n",ch);
         	countchave_a++;
 		} 
         if(ch=='}'){
-        	printf("%c È um operador de fechamento\n",ch);
+        	printf("%c √© um operador de fechamento\n",ch);
         	countchave_f++;
 		} 
         if(ch=='(') {
-        	printf("%c È um operador de fechamento\n",ch);
+        	printf("%c √© um operador de fechamento\n",ch);
         	countparen_a++;
 		}
         str[i]='\0';
         chave(str);
 		if(ch=='"') {
-        	printf("%c È um operador de fechamento\n",ch);
+        	printf("%c √© um operador de fechamento\n",ch);
         	countaspas++;
 		}
 		if(ch==')'){
-        	printf("%c È um operador de fechamento\n",ch);
+        	printf("%c √© um operador de fechamento\n",ch);
         	countparen_f++;
 		} 
         }
@@ -164,11 +165,11 @@ main()
      }
      else i=0;
     }
-    printf("Palavras: %d\nPalavras n„o reconhecidas: %d\nOperadores: %d\nN˙meros: %d\n",pc,id,op,num);
+    printf("Palavras: %d\nPalavras n√£o reconhecidas: %d\nOperadores: %d\nN√∫meros: %d\n",pc,id,op,num);
     if(countchave_a!=countchave_f || countparen_a!=countparen_f || countaspas%2!=0){
     	fprintf(f2, "\n%s", "O arquivo ");
         fprintf(f2, "%s", fname);
-        fprintf(f2, "%s", " apresenta falta de fechamento de cÛdigo!!!");
+        fprintf(f2, "%s", " apresenta falta de fechamento de c√≥digo!!!");
     	erro++;
 	} 
     if(erro=0) {
@@ -178,7 +179,7 @@ main()
     else{
     	fprintf(f2, "\n%s", "O arquivo ");
         fprintf(f2, "%s", fname);
-        fprintf(f2, "%s", " contÈm erros!!!");
+        fprintf(f2, "%s", " cont√©m erros!!!");
 	}
     fclose(f1);
     fclose(f2);
@@ -195,23 +196,23 @@ f2 = fopen("resultado.txt", "a");
 int k,flag=0, l=0;
 for(k=0;k<=10;k++){
      if(strcmp(palavras[k],p)==0){
-     printf("%s È uma palavra v·lida\n",p);
+     printf("%s √© uma palavra v√°lida\n",p);
      pc++;
      flag=1;
      break;
      }
 }
 if(flag==0){
-	//isdigit - verifica se o caracter È decimal
+	//isdigit - verifica se o caracter √© decimal
      if(isdigit(p[0])){
-     printf("%s È um n˙mero\n",p);
+     printf("%s √© um n√∫mero\n",p);
      num++;
      }
      else{
      if(p[0]!='\0'){
      fprintf(f2, "\n%s", "A palavra");
      fprintf(f2, "\t%s\t", p);
-     fprintf(f2, "\t%s", "n„o foi reconhecida");
+     fprintf(f2, "\t%s", "n√£o foi reconhecida");
      id++;
      }
      }
